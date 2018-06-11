@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>View Employees</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </head>
+    <body style="padding-top: 50px;">
+
+        <nav class="navbar navbar-default navbar-inner navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">WebSiteName</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">View All employees</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <h1>View all employees</h1>
+
+            <div th:if="${editedEmployee}">
+                <p style="color:green;">Successfully Edited employee</p>
+            </div>
+
+            <div th:if="${deletedEmployee}">
+                <p style="color:green;">Successfully Deleted employee</p>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Salary</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.id}"></td>
+                        <td th:text="${employee.firstname}"></td>
+                        <td th:text="${employee.lastname}">Simpson</td>
+                        <td th:text="'£'+${employee.salary}">£25000.00</td>
+                        <td><a th:href="'/employee/'+${employee.id}" class="btn btn-warning">Edit</a></td>
+                        <td>
+                            <form method="POST" th:action="@{/deleteEmployee}" >
+                                <input type="hidden" name="id" th:value="${employee.id}"/>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p th:text="'The average salary of all the employees is £'+${averageSalary}"></p>
+            <p th:if="${richest}" th:text="${richest.firstname}+' has the highest salary of: £'+${richest.salary}"></p>
+        </div>
+    </body>
+</html>

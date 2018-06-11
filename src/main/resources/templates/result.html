@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Results</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/employees">View All employees</a>
+        </nav>
+
+        <h1>Employee Results page</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${empOne.id}"></td>
+                    <td th:text="${empOne.firstname}"></td>
+                    <td th:text="${empOne.lastname}"></td>
+                    <td th:text="'£'+${empOne.salary}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${empTwo.id}"></td>
+                    <td th:text="${empTwo.firstname}"></td>
+                    <td th:text="${empTwo.lastname}"></td>
+                    <td th:text="'£'+${empTwo.salary}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p th:text="'The average of the two salaries is '+${average}"></p>
+        <p th:text="'The sum of the two salaries is '+${sum}"></p>
+        <p th:if="${richer}" th:text="${richer.firstname}+' has the higher salary of: £'+${richer.salary}"></p>
+    </body>
+</html>
